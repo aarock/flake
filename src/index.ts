@@ -1,20 +1,12 @@
-export interface Options {
-	/** Unique machine ID. */
-	nodeId?: number
-	/** Time, in milliseconds, to use as a custom epoch. Added to UNIX epoch (January 1, 1970). */
-	timeOffset?: number
-}
 
 export default class Flake {
+	private nodeId: number = 1
 	private sequence: number = 0
 	private lastTime: number = 0
-
-	private nodeId: number = 1
 	private timeOffset: number = 1_577_836_800 // 1970 => 2020
 
-	constructor ( options: Options = {} ) {
-		this.nodeId = ( options.nodeId || this.nodeId ) % 1023
-		this.timeOffset = options.timeOffset || this.timeOffset
+	constructor ( nodeId: number = 0 ) {
+		this.nodeId = nodeId % 1023
 	}
 
 	generateRaw (): BigInt {
@@ -55,19 +47,18 @@ export default class Flake {
 
 }
 
-
 var defaultFlake: Flake
 
-export function configure ( options: Options ) {
-	if ( !defaultFlake ) defaultFlake = new Flake( options )
+export function configure ( mid: number ) {
+	if ( !defaultFlake ) defaultFlake = new Flake( mid )
 }
 
-export function generate ( options?: Options ) {
-	if ( !defaultFlake ) defaultFlake = new Flake( options )
+export function generate ( mid?: number ) {
+	if ( !defaultFlake ) defaultFlake = new Flake( mid )
 	return defaultFlake.generate()
 }
 
-export function generateRaw ( options?: Options ) {
-	if ( !defaultFlake ) defaultFlake = new Flake( options )
+export function generateRaw ( mid?: number ) {
+	if ( !defaultFlake ) defaultFlake = new Flake( mid )
 	return defaultFlake.generateRaw()
 }

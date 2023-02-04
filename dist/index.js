@@ -1,11 +1,10 @@
 export default class Flake {
+    nodeId = 1;
     sequence = 0;
     lastTime = 0;
-    nodeId = 1;
     timeOffset = 1_577_836_800;
-    constructor(options = {}) {
-        this.nodeId = (options.nodeId || this.nodeId) % 1023;
-        this.timeOffset = options.timeOffset || this.timeOffset;
+    constructor(nodeId = 0) {
+        this.nodeId = nodeId % 1023;
     }
     generateRaw() {
         const nowTime = Date.now();
@@ -33,18 +32,18 @@ export default class Flake {
     }
 }
 var defaultFlake;
-export function configure(options) {
+export function configure(mid) {
     if (!defaultFlake)
-        defaultFlake = new Flake(options);
+        defaultFlake = new Flake(mid);
 }
-export function generate(options) {
+export function generate(mid) {
     if (!defaultFlake)
-        defaultFlake = new Flake(options);
+        defaultFlake = new Flake(mid);
     return defaultFlake.generate();
 }
-export function generateRaw(options) {
+export function generateRaw(mid) {
     if (!defaultFlake)
-        defaultFlake = new Flake(options);
+        defaultFlake = new Flake(mid);
     return defaultFlake.generateRaw();
 }
 //# sourceMappingURL=index.js.map
