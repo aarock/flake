@@ -1,0 +1,17 @@
+{
+  "name": "@aarock/flake",
+  "author": "aarock",
+  "version": "1.0.0",
+  "description": "ID Generator",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "peerDependencies": {},
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.7"
+  }
+}
