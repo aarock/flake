@@ -5,7 +5,6 @@
   "description": "ID Generator",
   "type": "module",
   "license": "MIT",
-  "private": true,
   "exports": {
     ".": "./dist/index.js"
   },
