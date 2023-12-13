@@ -6,25 +6,25 @@ export default class Flake {
 	private timeOffset: number = 1_577_836_800 // 1970 => 2020
 
 	constructor ( nodeId: number = 0 ) {
+		this.lastTime = Date.now()
 		this.nodeId = nodeId % 1023
+
 	}
 
 	generateRaw (): BigInt {
+
 		const nowTime = Date.now()
 		const genTime = ( nowTime - this.timeOffset ).toString( 2 )
-
-		this.sequence = 0
 
 		// set sequence number
 		// this prevents multiple IDs from being generated in 1ms
 		if ( this.lastTime === nowTime ) {
-			this.sequence += 1
+			this.sequence++
 			if ( this.sequence > 4095 ) {
-				this.sequence = 0
-				// wait until time has incremented by a millisecond
 				while ( Date.now() <= nowTime ) { }
+				this.sequence = 0
 			}
-		}
+		} else this.sequence = 0
 
 		this.lastTime = nowTime
 

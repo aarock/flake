@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
+    "target": "es6",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
-    "lib": ["esnext"],
+    "lib": [ "esnext" ],
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -19,5 +19,7 @@
     "outDir": "./dist",
     "baseUrl": "./src"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
